@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { JsonPipe } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { Component, inject, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,6 +9,16 @@ import { Component } from '@angular/core';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit{
+  http = inject(HttpClient);
+  userList: any[] = [];
+  ngOnInit(): void {
+    this.getAllUsers();
+  }
 
+  getAllUsers(){
+    this.http.get("http://localhost:5000/api/users/users").subscribe((res: any) => console.log(res));
+      //this.userList = res;
+   
+}
 }

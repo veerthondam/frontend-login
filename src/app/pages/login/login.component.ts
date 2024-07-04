@@ -22,7 +22,7 @@ export class LoginComponent {
     this.http.post("http://localhost:5000/api/users/login", this.loginObj)
       .subscribe((res: any) => {
         if (res.result) {
-          alert("Login success");
+         localStorage.setItem('lg-tkn', res.data.token);
           this.router.navigateByUrl('dashboard');
         } else {
           alert(res.message)
